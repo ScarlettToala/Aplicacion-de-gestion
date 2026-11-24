@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap');
+
+:root {
+  --fondo: #f0f3ea;
+  --superficie: #ffffff;
+  --tinta: #2a1a24;
+  --tinta-suave: #6b5a63;
+  --frambuesa: #b8235a;
+  --frambuesa-suave: #f7e3ec;
+  --pistacho: #8da66b;
+  --pistacho-suave: #e3ebd5;
+  --borde: #dbe2cd;
+
+  --titulo: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
+  --texto: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+h1, h2, h3 { font-family: var(--titulo); line-height: 1.15; margin: 0; }
+button, input { font: inherit; }

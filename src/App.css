@@ -1,0 +1,954 @@
+
+/* =========================================================
+   APP / CONTENEDOR GENERAL
+   ========================================================= */
+
+.app {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.app-titulo {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+  color: var(--tinta);
+}
+
+.centrado {
+  min-height: 50vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--tinta-suave);
+}
+
+/* =========================================================
+   CABECERA
+   ========================================================= */
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  min-height: 64px;
+  padding: 0.75rem max(1rem, calc((100vw - 1080px) / 2));
+
+  background: color-mix(in srgb, var(--superficie) 94%, transparent);
+  border-bottom: 1px solid var(--borde);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px);
+}
+
+.cabecera strong {
+  font-family: var(--titulo);
+  font-size: 1.2rem;
+  color: var(--frambuesa);
+}
+
+.cabecera-usuario {
+  margin-left: auto;
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   LAYOUT PRINCIPAL
+   ========================================================= */
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+/* =========================================================
+   LISTA DE RECETAS
+   ========================================================= */
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  position: sticky;
+  top: 84px;
+}
+
+.lista-item {
+  width: 100%;
+  text-align: left;
+
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+
+  padding: 0.8rem 0.95rem;
+
+  color: var(--tinta);
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.lista-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--pistacho);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.lista-item[aria-current='true'] {
+  background: var(--pistacho-suave);
+  border-color: var(--pistacho);
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.lista-item small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--tinta-suave);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+/* =========================================================
+   RECETA
+   ========================================================= */
+
+.receta {
+  min-width: 0;
+
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+
+  padding: clamp(1.2rem, 3vw, 2rem);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.04),
+    0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.receta h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+
+.receta-desc {
+  margin: 0.55rem 0 0;
+  color: var(--tinta-suave);
+  line-height: 1.6;
+}
+
+.receta h3 {
+  margin: 1.8rem 0 0.75rem;
+  font-size: 1.2rem;
+}
+
+/* =========================================================
+   ESCALADOR
+   ========================================================= */
+
+.escalador {
+  margin: 1.5rem 0;
+  padding: 1.2rem 1.35rem;
+
+  border-radius: 16px;
+
+  background: var(--frambuesa);
+  color: #fff;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.escalador label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.escalador-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.escalador input {
+  width: 6.5rem;
+  padding: 0.5rem 0.65rem;
+
+  font-family: var(--titulo);
+  font-size: 1.45rem;
+  font-weight: 700;
+  text-align: center;
+
+  color: var(--tinta);
+  background: #fff;
+
+  border: 2px solid transparent;
+  border-radius: 10px;
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.escalador input:focus {
+  border-color: var(--pistacho);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+.escalador-unidad {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.atajos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-left: auto;
+}
+
+.atajos button {
+  padding: 0.35rem 0.8rem;
+
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition: background 0.18s, transform 0.18s;
+}
+
+.atajos button:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+.atajos button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.multiplo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.escalador .multiplo input {
+  width: 4.5rem;
+  padding: 0.3rem 0.45rem;
+  font-size: 1.05rem;
+}
+
+.multiplo button {
+  min-width: 2.3rem;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.escalador-info {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+/* =========================================================
+   TABLA DE INGREDIENTES
+   ========================================================= */
+
+.tabla-ingredientes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-ingredientes tr {
+  transition: background 0.15s ease;
+}
+
+.tabla-ingredientes tr:hover {
+  background: var(--pistacho-suave);
+}
+
+.tabla-ingredientes td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--borde);
+  vertical-align: middle;
+}
+
+.tabla-ingredientes .cantidad {
+  width: 6.5rem;
+  text-align: right;
+
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tabla-ingredientes .nota {
+  color: var(--tinta-suave);
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+/* =========================================================
+   PASOS
+   ========================================================= */
+
+.pasos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pasos li {
+  counter-increment: paso;
+
+  display: grid;
+  grid-template-columns: 2.1rem 1fr;
+  gap: 0.85rem;
+
+  padding: 0.85rem 0;
+
+  border-bottom: 1px solid var(--borde);
+}
+
+.pasos li::before {
+  content: counter(paso);
+
+  width: 1.9rem;
+  height: 1.9rem;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--pistacho-suave);
+  color: var(--tinta);
+
+  font-weight: 700;
+}
+
+.receta-pasos {
+  counter-reset: paso;
+}
+
+.fase {
+  margin-bottom: 0.5rem;
+}
+
+.fase-titulo {
+  margin: 1.25rem 0 0.3rem;
+
+  font-family: var(--titulo);
+  font-size: 1.05rem;
+  color: var(--frambuesa);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.chip {
+  padding: 0.2rem 0.65rem;
+
+  background: var(--frambuesa-suave);
+  color: var(--frambuesa);
+
+  border-radius: 999px;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* =========================================================
+   AVISOS
+   ========================================================= */
+
+.consejo {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+
+  background: var(--pistacho-suave);
+  border-left: 4px solid var(--pistacho);
+  border-radius: 8px;
+
+  line-height: 1.55;
+}
+
+.aviso-escala {
+  margin-top: 1rem;
+  color: var(--tinta-suave);
+  font-size: 0.88rem;
+}
+
+.vacio {
+  padding: 3rem 1.5rem;
+
+  background: var(--superficie);
+  border: 1px dashed var(--borde);
+  border-radius: 16px;
+
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.error {
+  margin: 1rem 0;
+  padding: 1rem;
+
+  background: #fde8e8;
+  border: 1px solid #e2a3a3;
+  border-radius: 10px;
+
+  color: #8f1d1d;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  min-height: 40px;
+  padding: 0.55rem 1rem;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primario {
+  background: var(--frambuesa);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primario:hover:not(:disabled) {
+  background: #9c1d4d;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.btn-sec {
+  background: var(--superficie);
+  color: var(--tinta);
+  border-color: var(--borde);
+}
+
+.btn-sec:hover:not(:disabled) {
+  border-color: var(--pistacho);
+  background: var(--pistacho-suave);
+}
+
+.btn-peligro {
+  background: var(--superficie);
+  color: #a11d1d;
+  border-color: #e2a3a3;
+}
+
+.btn-peligro:hover:not(:disabled) {
+  background: #fde8e8;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.acciones-fin {
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login {
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  padding: 1.5rem;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      var(--pistacho-suave),
+      transparent 35%
+    ),
+    var(--fondo);
+}
+
+.login-caja {
+  width: min(100%, 390px);
+
+  display: grid;
+  gap: 1rem;
+
+  padding: 2rem;
+
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   FORMULARIOS
+   ========================================================= */
+
+.formulario {
+  max-width: 900px;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0.65rem 0.75rem;
+
+  border: 1px solid var(--borde);
+  border-radius: 9px;
+
+  background: #fff;
+  color: var(--tinta);
+
+  font: inherit;
+  font-weight: 400;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: color-mix(in srgb, var(--pistacho) 65%, var(--borde));
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--pistacho);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--pistacho-suave);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
+/* =========================================================
+   FIELDSETS
+   ========================================================= */
+
+.formulario fieldset {
+  margin: 0 0 1.25rem;
+  padding: 1.35rem;
+
+  display: grid;
+  gap: 1rem;
+
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.025);
+}
+
+.formulario legend {
+  padding: 0 0.5rem;
+
+  font-family: var(--titulo);
+  font-size: 1.15rem;
+  font-weight: 700;
+
+  color: var(--frambuesa);
+}
+
+/* =========================================================
+   FILAS DEL FORMULARIO
+   ========================================================= */
+
+.fila-doble {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1rem;
+}
+
+/* Ingredientes */
+
+.fila-ing {
+  display: grid;
+
+  grid-template-columns:
+    1.3fr
+    3fr
+    0.9fr
+    1.1fr
+    1.6fr
+    auto;
+
+  gap: 0.6rem;
+  align-items: center;
+
+  padding: 0.85rem;
+
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.fila-ing:hover {
+  border-color: var(--pistacho);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* Pasos */
+
+.fila-paso {
+  display: grid;
+
+  grid-template-columns: 2rem 1.2fr 3fr 1.1fr 0.8fr auto;
+
+  gap: 0.6rem;
+  align-items: start;
+
+  padding: 0.85rem;
+
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.fila-paso:hover {
+  border-color: var(--pistacho);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.num-paso {
+  width: 1.9rem;
+  height: 1.9rem;
+
+  display: grid;
+  place-items: center;
+
+  margin-top: 0.35rem;
+
+  border-radius: 50%;
+
+  background: var(--pistacho-suave);
+  color: var(--tinta);
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--frambuesa);
+  outline-offset: 2px;
+}
+
+.escalador :focus-visible {
+  outline-color: #fff;
+}
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .fila-ing {
+    grid-template-columns: 1.2fr 2fr 0.8fr 1fr;
+  }
+
+  .fila-ing input:nth-of-type(5) {
+    grid-column: span 2;
+  }
+
+  .fila-ing .btn {
+    grid-column: span 2;
+  }
+
+  .fila-paso {
+    grid-template-columns: 2rem 1fr 1fr;
+  }
+
+  .fila-paso textarea {
+    grid-column: span 2;
+  }
+
+  .fila-paso .acciones {
+    grid-column: span 2;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - MÓVIL
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .app {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Lista horizontal */
+
+  .lista {
+    position: static;
+
+    flex-direction: row;
+
+    overflow-x: auto;
+
+    padding: 0.2rem 0.1rem 0.6rem;
+
+    scrollbar-width: thin;
+  }
+
+  .lista-item {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 150px;
+
+    white-space: nowrap;
+  }
+
+  /* Receta */
+
+  .receta {
+    border-radius: 14px;
+    padding: 1.15rem;
+  }
+
+  /* Escalador */
+
+  .atajos {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .atajos button {
+    flex: 1;
+  }
+
+  /* Ingredientes */
+
+  .tabla-ingredientes .nota {
+    display: none;
+  }
+
+  .tabla-ingredientes .cantidad {
+    width: 5rem;
+  }
+
+  /* Formularios */
+
+  .fila-doble {
+    grid-template-columns: 1fr;
+  }
+
+  .fila-ing,
+  .fila-paso {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+
+    padding: 1rem;
+  }
+
+  .fila-ing input,
+  .fila-ing select,
+  .fila-ing .btn,
+  .fila-paso input,
+  .fila-paso textarea,
+  .fila-paso .acciones {
+    grid-column: auto;
+  }
+
+  .num-paso {
+    margin-bottom: 0.1rem;
+  }
+
+  .cabecera {
+    min-height: 58px;
+    padding: 0.7rem 1rem;
+  }
+
+  .cabecera-usuario {
+    display: none;
+  }
+
+  .cabecera .btn {
+    margin-left: auto;
+  }
+
+  .acciones-fin {
+    justify-content: stretch;
+  }
+
+  .acciones-fin .btn {
+    flex: 1;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - MÓVIL PEQUEÑO
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .app {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .app-titulo {
+    font-size: 1.7rem;
+  }
+
+  .formulario fieldset {
+    padding: 1rem;
+    border-radius: 13px;
+  }
+
+  .escalador {
+    padding: 1rem;
+  }
+
+  .escalador-fila {
+    align-items: stretch;
+  }
+
+  .escalador input {
+    width: 5.5rem;
+  }
+
+  .acciones-fin {
+    flex-direction: column;
+  }
+
+  .acciones-fin .btn {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   REDUCIR ANIMACIONES SI EL USUARIO LO PREFIERE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
