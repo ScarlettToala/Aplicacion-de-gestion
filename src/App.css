@@ -1,4 +1,3 @@
-
 /* =========================================================
    APP / CONTENEDOR GENERAL
    ========================================================= */
@@ -61,10 +60,17 @@
 }
 
 .filtros {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.filtros input,
+.filtros select {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* =========================================================
@@ -87,12 +93,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-
   position: sticky;
   top: 84px;
 }
 
 .lista-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
   width: 100%;
   text-align: left;
 
@@ -133,6 +142,11 @@
   font-weight: 400;
 }
 
+.lista-panel {
+  width: 100%;
+  min-width: 0;
+}
+
 /* =========================================================
    RECETA
    ========================================================= */
@@ -171,52 +185,52 @@
 /*Eliminar*/
 
 .modal-fondo {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    z-index: 1000;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
 }
 
 .modal-caja {
-    background: #fff;
-    color: #222;
-    border-radius: 12px;
-    padding: 1.25rem;
-    width: 100%;
-    max-width: 380px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 1.25rem;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .modal-caja h3 {
-    margin: 0;
+  margin: 0;
 }
 
 .modal-caja p {
-    margin: 0;
+  margin: 0;
 }
 
 .modal-caja input {
-    padding: 0.6rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .modal-caja .acciones {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: flex-end;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 }
 
 .modal-caja .btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* =========================================================
@@ -650,11 +664,9 @@
   padding: 1.5rem;
 
   background:
-    radial-gradient(
-      circle at top left,
+    radial-gradient(circle at top left,
       var(--pistacho-suave),
-      transparent 35%
-    ),
+      transparent 35%),
     var(--fondo);
 }
 
@@ -779,12 +791,7 @@ textarea::placeholder {
   display: grid;
 
   grid-template-columns:
-    1.3fr
-    3fr
-    0.9fr
-    1.1fr
-    1.6fr
-    auto;
+    1.3fr 3fr 0.9fr 1.1fr 1.6fr auto;
 
   gap: 0.6rem;
   align-items: center;
@@ -917,36 +924,40 @@ textarea::placeholder {
 
   .layout {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   /* Lista horizontal */
 
   .lista {
     position: static;
+    display: block;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+  }
 
+  .lista-items {
+    display: flex;
     flex-direction: row;
-
+    gap: 0.5rem;
     overflow-x: auto;
-
-    padding: 0.2rem 0.1rem 0.6rem;
-
+    padding: 0.1rem 0.1rem 0.6rem;
     scrollbar-width: thin;
   }
 
   .lista-item {
     flex: 0 0 auto;
     width: auto;
-    min-width: 150px;
-
-    white-space: nowrap;
+    min-width: 145px;
+    max-width: 200px;
+    white-space: normal;
   }
 
   /* Receta */
 
   .receta {
-    border-radius: 14px;
-    padding: 1.15rem;
+    margin-top: 0;
   }
 
   /* Escalador */
@@ -1017,6 +1028,20 @@ textarea::placeholder {
   .acciones-fin .btn {
     flex: 1;
   }
+
+  .filtros {
+    width: 100%;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .filtros input,
+  .filtros select {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
 }
 
 /* =========================================================
@@ -1064,6 +1089,7 @@ textarea::placeholder {
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
