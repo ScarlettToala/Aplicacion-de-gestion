@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { supabase } from '../backend/supabaseClient' // ajusta la ruta si hace falta
+import { supabase } from '../../backend/supabaseClient'
 
 const UNIDADES = ['g', 'kg', 'ml', 'l', 'unidad', 'cucharada', 'cucharadita', 'pizca', 'taza']
 const nuevoIng = () => ({ grupo: '', nombre: '', cantidad: '', unidad: 'g', recomendacion: '' })

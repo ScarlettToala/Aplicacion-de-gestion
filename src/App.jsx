@@ -1,8 +1,8 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { useAuth } from './AuthContext'
-import Login from './Login'
-import Recetas from './Recetas'
-import RecetaForm from './RecetaForm'
+import Login from './views/LoginView'
+import Recetas from './views/RecetasView'
+import RecetaForm from './views/RecetaFormView'
 import './App.css'
 
 // Cualquier usuario con sesión. (Esto solo controla qué pantallas se ven:
