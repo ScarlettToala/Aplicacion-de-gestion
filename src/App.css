@@ -60,6 +60,13 @@
   font-size: 0.9rem;
 }
 
+.filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
 /* =========================================================
    LAYOUT PRINCIPAL
    ========================================================= */

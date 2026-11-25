@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { supabase } from '../backend/supabaseClient'
 import { useAuth } from './AuthContext'
@@ -38,6 +38,9 @@ export default function Recetas() {
     const [error, setError] = useState(null)
     const [cargando, setCargando] = useState(true)
 
+    const [busqueda, setBusqueda] = useState('')
+    const [categoriaFiltro, setCategoriaFiltro] = useState('')
+
     async function cargar(idSeleccionar) {
         const { data, error } = await supabase
             .from('receta')
@@ -47,6 +50,7 @@ export default function Recetas() {
                 descripcion,
                 consejo,
                 rendimiento_cantidad,
+                categoria ( id, nombre ),
                 rendimiento_unidad,
                 receta_ingrediente (
                     id,
@@ -117,6 +121,39 @@ export default function Recetas() {
         cargar()
     }
 
+    // Quita tildes y pasa a minúsculas: "Tarta" == "tarta" == "tártá"
+    const normalizar = (t) =>
+        (t ?? '')
+            .toString()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+
+    // Categorías que existen realmente en las recetas cargadas
+    const categorias = useMemo(() => {
+        const mapa = new Map()
+        for (const r of recetas) {
+            if (r.categoria) mapa.set(r.categoria.id, r.categoria.nombre)
+        }
+        return [...mapa].sort((a, b) => a[1].localeCompare(b[1], 'es'))
+    }, [recetas])
+
+    const recetasFiltradas = useMemo(() => {
+        const palabras = normalizar(busqueda).split(/\s+/).filter(Boolean)
+
+        return recetas.filter(r => {
+            if (categoriaFiltro && String(r.categoria?.id) !== categoriaFiltro) {
+                return false
+            }
+
+            // Todas las palabras escritas deben aparecer en alguna parte
+            const texto = normalizar(
+                `${r.nombre} ${r.descripcion ?? ''} ${r.categoria?.nombre ?? ''}`
+            )
+            return palabras.every(p => texto.includes(p))
+        })
+    }, [recetas, busqueda, categoriaFiltro])
+
     return (
         <div className="app">
 
@@ -139,19 +176,42 @@ export default function Recetas() {
 
                 <nav className="lista" aria-label="Recetas">
 
+                    <div className="filtros">
+                        <input
+                            type="search"
+                            placeholder="Buscar receta…"
+                            value={busqueda}
+                            onChange={e => setBusqueda(e.target.value)}
+                            aria-label="Buscar receta"
+                        />
+
+                        <select
+                            value={categoriaFiltro}
+                            onChange={e => setCategoriaFiltro(e.target.value)}
+                            aria-label="Filtrar por categoría"
+                        >
+                            <option value="">Todas las categorías</option>
+                            {categorias.map(([id, nombre]) => (
+                                <option key={id} value={id}>{nombre}</option>
+                            ))}
+                        </select>
+                    </div>
+
                     {cargando && <p>Cargando…</p>}
 
                     {!cargando && recetas.length === 0 && (
                         <p>Aún no hay recetas.</p>
                     )}
 
-                    {recetas.map(r => (
+                    {!cargando && recetas.length > 0 && recetasFiltradas.length === 0 && (
+                        <p>No hay recetas que coincidan.</p>
+                    )}
+
+                    {recetasFiltradas.map(r => (
                         <button
                             key={r.id}
                             className="lista-item"
-                            aria-current={
-                                seleccionada?.id === r.id
-                            }
+                            aria-current={seleccionada?.id === r.id}
                             onClick={() => elegir(r)}
                         >
                             {r.nombre}
