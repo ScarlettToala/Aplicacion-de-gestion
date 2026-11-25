@@ -114,10 +114,6 @@ export default function RecetasView() {
     }
 
     async function eliminar(receta) {
-        if (!window.confirm(`¿Eliminar "${receta.nombre}"? No se puede deshacer.`)) {
-            return
-        }
-
         const { error: errorEliminacion } = await supabase.rpc('eliminar_receta', {
             p_id: receta.id
         })
@@ -161,6 +157,7 @@ export default function RecetasView() {
 
                 {seleccionada ? (
                     <DetalleReceta
+                        key={seleccionada.id}
                         receta={seleccionada}
                         multiplicador={multiplicador}
                         esAdmin={esAdmin}

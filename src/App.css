@@ -168,6 +168,57 @@
   font-size: 1.2rem;
 }
 
+/*Eliminar*/
+
+.modal-fondo {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+}
+
+.modal-caja {
+    background: #fff;
+    color: #222;
+    border-radius: 12px;
+    padding: 1.25rem;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modal-caja h3 {
+    margin: 0;
+}
+
+.modal-caja p {
+    margin: 0;
+}
+
+.modal-caja input {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.modal-caja .acciones {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.modal-caja .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* =========================================================
    ESCALADOR
    ========================================================= */
